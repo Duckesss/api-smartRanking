@@ -1,4 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
+
 const app_info = require('../../package.json')
 @Controller('')
 export class PadraoController {

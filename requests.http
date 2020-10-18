@@ -3,15 +3,17 @@
 ### verifica versao
 GET {{path}}
 
+### get jogadores
+GET {{path}}/api/v1/jogadores
+
 ### upsert jogadores
 POST {{path}}/api/v1/jogadores
 Content-Type: application/json
 
 {
     
-    "celular": "1",
-    "email": "1",
-    "nome": "1",
-    "ranking": "1",
-    "posicaoRanking": "1"
+    "celular": "31999878433",
+    "email": "teste@teste.com",
+    "nome": "MATEUS",
+    "cpf": "10125554613"
 }
