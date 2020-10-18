@@ -3,8 +3,19 @@
 ### verifica versao
 GET {{path}}
 
+### delete jogadores pelo cpf
+DELETE {{path}}/api/v1/jogadores?cpf=10125554613
+### delete jogadores
+DELETE {{path}}/api/v1/jogadores
+
+
+### get jogadores pelo cpf
+GET {{path}}/api/v1/jogadores?cpf=10125554613
 ### get jogadores
 GET {{path}}/api/v1/jogadores
+
+
+
 
 ### upsert jogadores
 POST {{path}}/api/v1/jogadores

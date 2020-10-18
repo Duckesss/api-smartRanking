@@ -7,11 +7,44 @@ import { v4 as uuid } from 'uuid'
 export class JogadoresService {
     private readonly logger = new Logger(JogadoresService.name)
     private jogadores : Jogador[] = []
-
-    getJogadores(){
-        return this.jogadores
+    private notFound : Object = {
+        success: 1,
+        msg: 'Jogador não encontrado'
+    }
+    private find(cpf : String,intercept : Function = _ => (null)){
+        var retorno = this.jogadores.find((e,i) => {
+            intercept(e,i)
+            return e.cpf == cpf
+        })
+        return retorno || this.notFound
+    }
+    
+    async getJogadores(cpf = null): Promise<Jogador[] | Jogador | Object>{
+        if(!cpf)
+            return this.jogadores   // se nao tem cpf retorna todos os jogadores
+        return this.find(cpf)
     }
 
+    async deleteJogadores(cpf = null): Promise<Jogador[] | Jogador | Object>{
+        if(!cpf){
+            var jogadores = this.jogadores
+            this.jogadores = []
+            return {
+                success: 1,
+                msg: "Jogadores deletados com sucesso",
+                resposta: jogadores
+            }
+        }else{
+            var indexDeletar = null
+            var jogador = this.find(cpf,(e,i) => {
+                if(e.cpf == cpf)
+                    indexDeletar = i
+            })
+            this.jogadores.splice(indexDeletar,1)
+            return jogador
+        }
+    }
+    
     async upsert(jogadorDto : CriarJogadorDto) : Promise<Jogador> {
         this.logger.log(`Cria jogador dto:`)
         this.logger.log(jogadorDto)
