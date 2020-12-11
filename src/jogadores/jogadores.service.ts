@@ -11,7 +11,7 @@ export class JogadoresService {
         success: 1,
         msg: 'Jogador não encontrado'
     }
-    private find(
+    private async find(
         {
             email = '',
             cpf = ''
@@ -63,7 +63,7 @@ export class JogadoresService {
             return this.find({email})
     }
 
-    async deleteJogadores(cpf : string): Promise<Jogador[] | Jogador | Object>{
+    async deleteJogadores(cpf : string): Promise<Jogador | Object>{
         if(!cpf){
             var jogadores = this.jogadores
             this.jogadores = []
@@ -74,7 +74,7 @@ export class JogadoresService {
             }
         }else{
             var indexDeletar = null
-            var jogador = this.find({cpf},(e,i) => {
+            var jogador = await this.find({cpf},(e,i) => {
                 if(e.cpf == cpf)
                     indexDeletar = i
             })
