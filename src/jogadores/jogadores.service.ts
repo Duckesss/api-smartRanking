@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CriarJogadorDto } from './dtos/criar-jogador.dto'
 import { Jogador } from './interfaces/jogador.interface'
 import { v4 as uuid } from 'uuid'
@@ -12,26 +12,25 @@ export class JogadoresService {
         msg: 'Jogador não encontrado'
     }
     private find(
-        parametros: {
-            cpf?: String,
-            email?: String
+        {
+            email = '',
+            cpf = ''
         },
         intercept : Function = _ => (null)
     ){
-        if(Object.values(parametros).every(e => e === undefined))
-            return this.notFound
-        parametros.email = this.trataEmail(parametros.email)
+        email = this.trataEmail(email)
         var retorno = this.jogadores.find((e,i) => {
             intercept(e,i)
-            if(parametros.cpf)
-                return e.cpf == parametros.cpf
-            if(parametros.email)
-                return e.email == parametros.email
+            if(cpf)
+                return e.cpf == cpf
+            if(email)
+                return e.email == email
         })
-        return retorno || this.notFound
+        if(retorno)
+            return retorno
+        throw new NotFoundException(this.notFound)
     }
     
-
     // verifica se o jogador ja existe pelo seu cpf
     private verificaExistencia(jogadorDto : CriarJogadorDto){
         var jogador = this.jogadores.find(e => e.cpf == jogadorDto.cpf)
@@ -56,12 +55,11 @@ export class JogadoresService {
         this.jogadores.push(jogador)
         return jogador
     }
-    private trataEmail(email: String | undefined){
-        if(email)
-            return email.replace(/%40/g,'@').replace(/%20/g,',').replace(/%30/g,'.')
-        return email
+    private trataEmail(email: string){
+        return email.replace(/%40/g,'@').replace(/%20/g,',').replace(/%30/g,'.')
     }
-    async getJogadores(cpf = null,email = null): Promise<Jogador[] | Jogador | Object>{
+    async getJogadores(cpf : string,email : string): Promise<Jogador[] | Jogador | Object>{
+        email = this.trataEmail(email)
         if(!cpf && !email)
             return this.jogadores   // se nao tem cpf retorna todos os jogadores
         if(cpf)            
@@ -70,7 +68,7 @@ export class JogadoresService {
             return this.find({email})
     }
 
-    async deleteJogadores(cpf = null): Promise<Jogador[] | Jogador | Object>{
+    async deleteJogadores(cpf : string): Promise<Jogador[] | Jogador | Object>{
         if(!cpf){
             var jogadores = this.jogadores
             this.jogadores = []
