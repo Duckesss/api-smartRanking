@@ -18,7 +18,6 @@ export class JogadoresService {
         },
         intercept : Function = _ => (null)
     ){
-        email = this.trataEmail(email)
         var retorno = this.jogadores.find((e,i) => {
             intercept(e,i)
             if(cpf)
@@ -55,11 +54,7 @@ export class JogadoresService {
         this.jogadores.push(jogador)
         return jogador
     }
-    private trataEmail(email: string){
-        return email.replace(/%40/g,'@').replace(/%20/g,',').replace(/%30/g,'.')
-    }
     async getJogadores(cpf : string,email : string): Promise<Jogador[] | Jogador | Object>{
-        email = this.trataEmail(email)
         if(!cpf && !email)
             return this.jogadores   // se nao tem cpf retorna todos os jogadores
         if(cpf)            
