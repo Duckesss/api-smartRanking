@@ -11,10 +11,10 @@ DELETE {{path}}/api/v1/jogadores
 
 ### get jogadores pelo cpf
 GET {{path}}/api/v1/jogadores?cpf=10125554613
+### get jogadores pelo email
+GET {{path}}/api/v1/jogadores?email=teste@teste.com
 ### get jogadores
 GET {{path}}/api/v1/jogadores
-
-
 
 
 ### upsert jogadores

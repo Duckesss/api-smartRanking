@@ -14,8 +14,11 @@ export class JogadoresController {
         return jogadorCriado
     }
     @Get()
-    async getJogadores( @Query('cpf') cpf: String ) : Promise<Jogador[] | Jogador | Object>{
-        return await this.jogadoresService.getJogadores(cpf)
+    async getJogadores(
+         @Query('cpf') cpf: String,
+         @Query('email') email : String
+    ) : Promise<Jogador[] | Jogador | Object>{
+        return await this.jogadoresService.getJogadores(cpf,email)
     }
     @Delete()
     async deleteJogadores( @Query('cpf') cpf: String ) : Promise<Jogador[] | Jogador | Object>{
