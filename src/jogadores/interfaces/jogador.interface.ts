@@ -1,6 +1,7 @@
+import { Document } from 'mongoose'
+
 // interface do jogador
-export interface Jogador{
-    readonly _id: String;
+export interface Jogador extends Document{
     readonly celular: String;
     readonly email: String;
     cpf: String;

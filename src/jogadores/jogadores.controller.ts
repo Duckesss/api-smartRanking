@@ -1,11 +1,10 @@
-import { Body, Controller, Delete, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Query, Param } from '@nestjs/common';
 import { CriarJogadorDto } from './dtos/criar-jogador.dto'
 import { JogadoresService } from './jogadores.service'
 import { Jogador } from './interfaces/jogador.interface'
 
 @Controller('/api/v1/jogadores')
 export class JogadoresController {
-
     constructor(private readonly jogadoresService : JogadoresService){}
 
     @Post()
@@ -20,9 +19,12 @@ export class JogadoresController {
     ) : Promise<Jogador[] | Jogador | Object>{
         return await this.jogadoresService.getJogadores(cpf,email)
     }
+    @Delete('/:cpf')
+    async deleteJogador( @Param() params) : Promise<Object>{
+        return await this.jogadoresService.deleteJogador(params.cpf)
+    }
     @Delete()
-    async deleteJogadores( @Query('cpf') cpf: string) : Promise<Jogador[] | Jogador | Object>{
-        return await this.jogadoresService.deleteJogadores(cpf)
+    async clearDataBase() : Promise<Object>{
+        return await this.jogadoresService.clearDataBase()
     }
 }
-
