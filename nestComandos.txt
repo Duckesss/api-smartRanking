@@ -1,2 +1,4 @@
-Criar controller:
-nest g controller jogadores
+Criar nova entidade:
+nest g module entidade
+nest g controller entidade
+nest g service entidade

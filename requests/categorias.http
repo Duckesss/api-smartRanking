@@ -1,0 +1,46 @@
+@path = http://localhost:8081/api/v1
+
+### GET ALL
+GET {{path}}/categorias
+
+### GET BY ID
+GET {{path}}/categorias/A
+
+### UPDATE
+PUT {{path}}/categorias/A
+Content-Type: application/json
+
+{
+    "descricao": "Categoria A",
+    "eventos": [{
+        "nome": "VITORIA",
+        "operacao": "+",
+        "valor": 10
+    }]
+}
+
+### INSERIR JOGADOR EM UMA CATEGORIA
+POST {{path}}/categorias/A/jogadores/600270e2b21e7229001e70bb
+
+
+### CRIAR CATEGORIA
+POST {{path}}/categorias
+Content-Type: application/json
+
+{
+    "categoria": "A",
+    "descricao": "Categoria A",
+    "eventos": [{
+        "nome": "VITORIA",
+        "operacao": "+",
+        "valor": 30
+    },{
+        "nome": "VITORIA_LIDER",
+        "operacao": "+",
+        "valor": 50
+    },{
+        "nome": "DERROTA",
+        "operacao": "+",
+        "valor": 0
+    }]
+}

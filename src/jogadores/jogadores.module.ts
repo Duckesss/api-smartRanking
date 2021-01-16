@@ -5,13 +5,14 @@ import { MongooseModule } from '@nestjs/mongoose'
 import { JogadorSchema } from './interfaces/jogador.schema';
 
 const mongooseModel = [{
-	name: 'Jogador',
-	schema: JogadorSchema
+  name: 'Jogador',
+  schema: JogadorSchema
 }]
 
 @Module({
   imports: [MongooseModule.forFeature(mongooseModel)],
   controllers: [JogadoresController],
-  providers: [JogadoresService]
+  providers: [JogadoresService],
+  exports: [JogadoresService]
 })
-export class JogadoresModule {}
+export class JogadoresModule { }

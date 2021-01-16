@@ -15,23 +15,23 @@ Content-Type: application/json
 
 {
     "celular": "31999878433",
-    "email": "teste@teste.com",
+    "email": "Teste@teste.com",
     "nome": "MATEUS",
-    "cpf": "10125554614"
+    "cpf": "10125554613"
 }
 
 ### UPDATE
-PUT {{path}}/jogadores/60026bc1a2547b31c06e3729
+PUT {{path}}/jogadores/600270e2b21e7229001e70be
 Content-Type: application/json
 
 {
     "nome": "JONAS2",
     "email": "teste00@teste.com",
-    "cpf": "10125554614"
+    "cpf": "10125554611"
 }
 
 ### DELETE ALL
 DELETE {{path}}/jogadores
 
 ### DELETE BY ID
-DELETE {{path}}/jogadores/60022c251992480d40e4e516
+DELETE {{path}}/jogadores/60032f3a6a60fd1db4531a24
