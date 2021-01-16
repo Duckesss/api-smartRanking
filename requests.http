@@ -15,9 +15,9 @@ Content-Type: application/json
 
 {
     "celular": "31999878433",
-    "email": "teste@teste1.com",
+    "email": "teste@teste.com",
     "nome": "MATEUS",
-    "cpf": "10125554613"
+    "cpf": "10125554614"
 }
 
 ### UPDATE
@@ -25,7 +25,6 @@ PUT {{path}}/jogadores/600228fecb45801ef0cb2a50
 Content-Type: application/json
 
 {
-    "email": "teste@teste1.com",
     "nome": "JONAS1",
     "cpf": "10125554613"
 }
