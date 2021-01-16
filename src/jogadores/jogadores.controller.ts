@@ -16,7 +16,9 @@ export class JogadoresController {
     }
 
     @Put('/:_id')
-    @UsePipes(ValidationPipe)
+    @UsePipes(new ValidationPipe({
+        whitelist: true
+    }))
     async update(
         @Body() jogadorDto: AtualizarJogadorDto,
         @Param('_id', JogadoresValidacaoParametrosPipe) _id: string

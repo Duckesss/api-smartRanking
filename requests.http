@@ -21,12 +21,13 @@ Content-Type: application/json
 }
 
 ### UPDATE
-PUT {{path}}/jogadores/600228fecb45801ef0cb2a50
+PUT {{path}}/jogadores/60026bc1a2547b31c06e3729
 Content-Type: application/json
 
 {
-    "nome": "JONAS1",
-    "cpf": "10125554613"
+    "nome": "JONAS2",
+    "email": "teste00@teste.com",
+    "cpf": "10125554614"
 }
 
 ### DELETE ALL
