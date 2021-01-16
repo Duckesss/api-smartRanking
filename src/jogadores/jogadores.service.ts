@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { CriarJogadorDto } from './dtos/criar-jogador.dto'
 import { AtualizarJogadorDto } from './dtos/atualizar-jogador-dto'
 import { Jogador } from './interfaces/jogador.interface'
@@ -27,7 +27,11 @@ export class JogadoresService {
     }
 
     async getByID(_id: string): Promise<Jogador> {
-        return this.exists({ _id })
+        const jogador = await this.exists({ _id })
+        if (!jogador)
+            throw new NotFoundException(`Jogador de id ${_id} não encontrado`)
+        return jogador
+
     }
 
     async getAll(): Promise<Jogador[]> {

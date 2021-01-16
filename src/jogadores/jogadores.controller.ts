@@ -29,8 +29,8 @@ export class JogadoresController {
     @Get('/:_id')
     async getByID(
         @Param('_id', JogadoresValidacaoParametrosPipe) _id: string
-    ): Promise<Jogador | Object> {
-        return await this.jogadoresService.getByID(_id) || {}
+    ): Promise<Jogador> {
+        return await this.jogadoresService.getByID(_id)
     }
 
     @Get()
