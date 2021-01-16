@@ -1,32 +1,37 @@
-@path = http://localhost:8080
+@path = http://localhost:8081/api/v1
 
 ### verifica versao
 GET {{path}}
 
-### delete jogadores pelo cpf
-DELETE {{path}}/api/v1/jogadores/10125554613
+### GET ALL
+GET {{path}}/jogadores
 
+### GET BY ID
+GET {{path}}/jogadores/60022c251992480d40e4e516
 
-### delete jogadores
-DELETE {{path}}/api/v1/jogadores/
-
-### get jogadores pelo cpf
-GET {{path}}/api/v1/jogadores?cpf=10125554613
-
-
-### get jogadores pelo email
-GET {{path}}/api/v1/jogadores?email=teste@teste.com
-
-### get jogadores
-GET {{path}}/api/v1/jogadores
-
-### upsert jogadores
-POST {{path}}/api/v1/jogadores
+### INSERT
+POST {{path}}/jogadores
 Content-Type: application/json
 
 {
     "celular": "31999878433",
-    "email": "teste@teste.com",
+    "email": "teste@teste1.com",
     "nome": "MATEUS",
     "cpf": "10125554613"
 }
+
+### UPDATE
+PUT {{path}}/jogadores/600228fecb45801ef0cb2a50
+Content-Type: application/json
+
+{
+    "email": "teste@teste1.com",
+    "nome": "JONAS1",
+    "cpf": "10125554613"
+}
+
+### DELETE ALL
+DELETE {{path}}/jogadores
+
+### DELETE BY ID
+DELETE {{path}}/jogadores/60022c251992480d40e4e516

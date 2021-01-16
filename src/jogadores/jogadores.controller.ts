@@ -1,30 +1,51 @@
-import { Body, Controller, Delete, Get, Post, Query, Param } from '@nestjs/common';
+import { Put, Body, Controller, Delete, Get, Post, Query, Param, UsePipes, ValidationPipe, Injectable, Inject } from '@nestjs/common';
 import { CriarJogadorDto } from './dtos/criar-jogador.dto'
 import { JogadoresService } from './jogadores.service'
 import { Jogador } from './interfaces/jogador.interface'
+import { JogadoresValidacaoParametrosPipe } from './pipes/jogadores-validacao-parametros.pipe'
 
 @Controller('/api/v1/jogadores')
 export class JogadoresController {
-    constructor(private readonly jogadoresService : JogadoresService){}
+    constructor(private readonly jogadoresService: JogadoresService) { }
 
     @Post()
-    async upsert(@Body() jogadorDto : CriarJogadorDto){
-        var jogadorCriado = await this.jogadoresService.upsert(jogadorDto)
-        return jogadorCriado
+    @UsePipes(ValidationPipe)
+    async insert(@Body() jogadorDto: CriarJogadorDto): Promise<Jogador> {
+        return await this.jogadoresService.insert(jogadorDto)
     }
+
+    @Put('/:_id')
+    async update(
+        @Body() jogadorDto: CriarJogadorDto,
+        @Param('_id', JogadoresValidacaoParametrosPipe) _id: string
+    ): Promise<Jogador> {
+        return await this.jogadoresService.update(_id, jogadorDto)
+    }
+
+    @Get('/:_id')
+    async getByID(
+        @Param('_id', JogadoresValidacaoParametrosPipe) _id: string
+    ): Promise<Jogador | Object> {
+        return await this.jogadoresService.getByID(_id) || {}
+    }
+
     @Get()
-    async getJogadores(
-         @Query('cpf') cpf: string,
-         @Query('email') email : string
-    ) : Promise<Jogador[] | Jogador | Object>{
-        return await this.jogadoresService.getJogadores(cpf,email)
+    async getAll(
+    ): Promise<Jogador[]> {
+        return await this.jogadoresService.getAll()
     }
-    @Delete('/:cpf')
-    async deleteJogador( @Param() params) : Promise<Object>{
-        return await this.jogadoresService.deleteJogador(params.cpf)
-    }
+
     @Delete()
-    async clearDataBase() : Promise<Object>{
-        return await this.jogadoresService.clearDataBase()
-    }
+    async deleteAll(
+    ): Promise<Object> {
+        return await this.jogadoresService.deleteAll()
+    };
+
+    @Delete(':_id')
+    async deleteByID(
+        @Param('_id', JogadoresValidacaoParametrosPipe) _id: string
+    ): Promise<Object> {
+        return await this.jogadoresService.deleteByID(_id)
+    };
+
 }
