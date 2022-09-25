@@ -1,0 +1,33 @@
+POST {{apiHost}}/api/v1/players
+Content-Type: application/json
+
+{
+    "email": "mateus2@email.com",
+    "name": "Mateus 2",
+    "phoneNumber": "31996875842"
+}
+
+###
+POST {{apiHost}}/api/v1/players
+Content-Type: application/json
+
+{
+    "email": "mateus1@email.com",
+    "name": "Mateus 1",
+    "phoneNumber": "31996875841"
+}
+
+### GET ALL
+
+GET {{apiHost}}/api/v1/players
+
+
+### GET ONE
+
+GET {{apiHost}}/api/v1/players?email=mateus1@email.com
+
+
+### DELETE ONE
+
+DELETE {{apiHost}}/api/v1/players?email=mateus1@email.com
+

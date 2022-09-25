@@ -1,10 +1,18 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { MongooseModule } from '@nestjs/mongoose';
+import { PlayersModule } from './players/players.module';
+
+console.log(
+  process.env.MONGO_CONNECTION_URL,
+  '======== process.env.MONGO_CONNECTION_URL',
+);
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    PlayersModule,
+    MongooseModule.forRoot(process.env.MONGO_CONNECTION_URL),
+  ],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
