@@ -2,14 +2,15 @@ import { Module } from '@nestjs/common';
 import { PlayersController } from './players.controller';
 import { PlayersService } from './players.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { PlayerSchema } from './interfaces/player.schema';
+import { PlayerTypes } from './types';
+import { MongoConfig } from '../config/mongodb';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       {
-        name: 'Player',
-        schema: PlayerSchema,
+        name: MongoConfig.players.schemaName,
+        schema: PlayerTypes.PlayerSchema,
       },
     ]),
   ],

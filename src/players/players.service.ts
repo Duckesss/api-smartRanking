@@ -1,6 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { CreatePlayerDto } from './dtos';
-import { Player } from './interfaces';
+import { PlayerTypes } from './types';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
@@ -8,16 +7,19 @@ import { Model } from 'mongoose';
 export class PlayersService {
   private readonly logger = new Logger(PlayersService.name);
   constructor(
-    @InjectModel('Player') private readonly playerModel: Model<Player>,
+    @InjectModel('Player')
+    private readonly playerModel: Model<PlayerTypes.Player>,
   ) {}
 
-  private async create(dto: CreatePlayerDto): Promise<Player> {
+  private async create(
+    dto: PlayerTypes.CreatePlayerDto,
+  ): Promise<PlayerTypes.Player> {
     this.logger.log(`create player: ${JSON.stringify(dto)}`);
     const newPlayer = new this.playerModel(dto);
     return newPlayer.save();
   }
 
-  private async update(player: CreatePlayerDto) {
+  private async update(player: PlayerTypes.CreatePlayerDto) {
     this.playerModel
       .findOneAndUpdate(
         {
@@ -30,11 +32,11 @@ export class PlayersService {
       .exec();
   }
 
-  getAll(): Promise<Player[]> {
+  getAll(): Promise<PlayerTypes.Player[]> {
     return this.playerModel.find().exec();
   }
 
-  async getOne(email: string): Promise<Player[]> {
+  async getOne(email: string): Promise<PlayerTypes.Player[]> {
     const player = await this.playerModel.findOne({ email }).exec();
 
     return [player];
@@ -44,7 +46,7 @@ export class PlayersService {
     return this.playerModel.remove({ email }).exec();
   }
 
-  async upsertPlayer(createPlayerDto: CreatePlayerDto) {
+  async upsertPlayer(createPlayerDto: PlayerTypes.CreatePlayerDto) {
     const { email } = createPlayerDto;
 
     const foundPlayer = await this.playerModel
