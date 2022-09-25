@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { MongoConfig } from '../../config/mongodb';
+import { MongoConfig } from '../config/mongodb';
 import { Document } from 'mongoose';
 
 export class CreatePlayerDto {
