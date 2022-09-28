@@ -36,3 +36,4 @@ lerna-debug.log*
 
 
 .env
+strest_history.json

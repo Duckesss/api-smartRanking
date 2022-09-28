@@ -1,0 +1,40 @@
+version: 2 # only version at the moment
+
+variables:
+  host: 'http://localhost:8080'
+
+requests: # all test requests will be listed here
+  createUser1: # name the request however you want
+    request:
+      url: <$ host $>/api/v1/players
+      method: POST # required
+      postData:
+        mimeType: application/json
+        text:
+          email: mateus2@email.com
+          name: Mateus 2
+          phoneNumber: 31996875842
+  createUser2: # name the request however you want
+    request:
+      url: <$ host $>/api/v1/players
+      method: POST # required
+      postData:
+        mimeType: application/json
+        text:
+          email: mateus1@email.com
+          name: Mateus 1
+          phoneNumber: 31996875841
+  createUser3: # name the request however you want
+    request:
+      url: <$ host $>/api/v1/players
+      method: POST # required
+      postData:
+        mimeType: application/json
+        text:
+          email: mateus3@email.com
+          name: Mateus 3
+          phoneNumber: 31996875843
+  getUsers: # name the request however you want
+    request:
+      url: <$ host $>/api/v1/players
+      method: GET # required

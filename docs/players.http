@@ -12,8 +12,8 @@ POST {{apiHost}}/api/v1/players
 Content-Type: application/json
 
 {
-    "email": "mateus1@email.com",
-    "name": "Mateus 1",
+    "email": "mateus2@email.com",
+    "name": "Mateus 2",
     "phoneNumber": "31996875841"
 }
 
